@@ -93,12 +93,12 @@ peer chaincode query -C mychannel -n basic -c '{"function":"QueryAssetsByOwner",
 ```
 ./network.sh down
 ```
-# Remove chaincode containers
+### Remove chaincode containers
 ```
 docker rm -f $(docker ps -aq)
 ```
 
-# Remove chaincode images
+### Remove chaincode images
 ```
 docker rmi -f $(docker images -q)
 ```
