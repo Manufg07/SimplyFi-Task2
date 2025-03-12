@@ -1,7 +1,7 @@
 # 🚀 SimplyFi Task2
 
 - Basic Chaincode Implementation for Asset Management
-- Smart Contract for Supply Chain Tracking
+- Chaincode for Supply Chain Tracking
 
 ![Hyperledger Fabric](https://img.shields.io/badge/Hyperledger-Fabric-2F3134?logo=hyperledger&logoColor=white)
 

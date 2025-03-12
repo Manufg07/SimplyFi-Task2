@@ -1,0 +1,7 @@
+{
+    "index": {
+        "fields": ["currentStatus"]
+    },
+    "name": "statusIndex",
+    "type": "json"
+}

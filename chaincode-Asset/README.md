@@ -58,30 +58,30 @@ export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.examp
 
 export CORE_PEER_ADDRESS=localhost:7051
 ```
-## Invoke command to add assets
+## 1.Invoke command to add assets
 ```
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"CreateAsset","Args":["Asset-1","Laptop","user1","1000"]}'
 ```
-## Query Command to read an asset
+## 2.Query Command to read an asset
 ```
 peer chaincode query -C mychannel -n basic -c '{"function":"ReadAsset","Args":["Asset-1"]}'
 
 ```
-## Invoke command to Update assets
+## 3.Invoke command to Update assets
 ```
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"UpdateAsset","Args":["Asset-1","Updated Laptop","user1","1200"]}'
 ```
-## Invoke command to Delete assets
+## 4.Invoke command to Delete assets
 ```
 peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"DeleteAsset","Args":["Asset-1"]}'
 ```
-## Query Command to check Asset exist
+## 5.Query Command to check Asset exist
 ```
 peer chaincode query -C mychannel -n basic -c '{"function":"AssetExists","Args":["Asset-1"]}'
 
 ```
 
-## Query Command to read QueryAssetsByOwner
+## 6.Query Command to read QueryAssetsByOwner
 ```
 peer chaincode query -C mychannel -n basic -c '{"function":"QueryAssetsByOwner","Args":["user1"]}'
 ```
