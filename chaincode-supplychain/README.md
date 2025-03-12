@@ -10,6 +10,18 @@ A Hyperledger Fabric-based solution for tracking products through supply chain s
 - 🔍 **Advanced Queries**: Filter by status, retrieve full history, and list all products
 - 🛡️ **Data Integrity**: Comprehensive input validation and error handling
 
+## 📜 Main Chaincode Functions
+
+| Function Name         | Description                                                                 |
+|-----------------------|-----------------------------------------------------------------------------|
+| 🆕 **RegisterProduct** | Registers a new product with an initial "Manufactured" status               |
+| 🔄 **UpdateStatus**    | Updates the product status while enforcing valid state transitions           |
+| 🔍 **GetProduct**      | Retrieves complete product details, including history                       |
+| 🕰️ **GetProductHistory** | Fetches only the status change timeline for a product                     |
+| 📋 **GetAllProducts**  | Lists all registered products in the ledger                                 |
+| 🎯 **GetProductsByStatus** | Retrieves all products with a specific status                           |
+| ✅ **ProductExists**   | Checks if a product exists in the ledger 
+
 ## ⚙️ Prerequisites
 
 - 🐳 Hyperledger Fabric v2.4+ network
