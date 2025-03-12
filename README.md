@@ -15,6 +15,11 @@
 
 Reference: https://hyperledger-fabric.readthedocs.io/en/latest/index.html
 
+### Commands to setup fabric-samples for running a test network and deplying an chaincode. Other required Commands are given in the curresponding folders readme.
+- Step1 : setup fabric samples
+- Step2 : clone the repo and add chaincode-Asset folder inside CHF/fabric-samples/asset-transfer-basic/ chaincode-supplychain
+-Step 3: Follow the commands inside the Chaincode-Asset Readme 
+-Step 4: Same for chaincode-supplychain
 
 ## ⚙️ Install Dependencies
 
