@@ -8,12 +8,12 @@ import (
 	"github.com/hyperledger/fabric-contract-api-go/v2/contractapi"
 )
 
-// SmartContract provides functions for managing an Asset
+// SmartContract for managing an Asset
 type SmartContract struct {
 	contractapi.Contract
 }
 
-// Asset describes the asset structure
+// Asset structure
 type Asset struct {
 	AssetID string `json:"assetID"`
 	Name    string `json:"name"`
@@ -21,13 +21,12 @@ type Asset struct {
 	Value   int    `json:"value"` 
 }
 
-// CreateAsset adds a new asset to the ledger
+// CreateAsset 
 func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface, assetID, name, owner, value string) error {
 	if assetID == "" || name == "" || owner == "" || value == "" {
 		return fmt.Errorf("all fields must be non-empty")
 	}
 
-	// Convert Value to integer
 	valueInt, err := strconv.Atoi(value)
 	if err != nil {
 		return fmt.Errorf("value must be a valid integer")
@@ -63,12 +62,12 @@ func (s *SmartContract) CreateAsset(ctx contractapi.TransactionContextInterface,
 	if err != nil {
 		return fmt.Errorf("failed to create composite key: %v", err)
 	}
-	err = ctx.GetStub().PutState(compositeKey, []byte{0}) // Dummy value
+	err = ctx.GetStub().PutState(compositeKey, []byte{0}) 
 	if err != nil {
 		return fmt.Errorf("failed to store composite key: %v", err)
 	}
 
-	// Emit event for asset creation
+	// Emit event 
 	err = ctx.GetStub().SetEvent("AssetCreated", assetBytes)
 	if err != nil {
 		return fmt.Errorf("failed to emit event: %v", err)
@@ -96,7 +95,7 @@ func (s *SmartContract) ReadAsset(ctx contractapi.TransactionContextInterface, a
 	return &asset, nil
 }
 
-// UpdateAsset modifies an existing asset's details
+// UpdateAsset 
 func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface, assetID, name, owner, value string) error {
     exists, err := s.AssetExists(ctx, assetID)
     if err != nil {
@@ -106,7 +105,6 @@ func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface,
         return fmt.Errorf("the asset %s does not exist", assetID)
     }
 
-    // Convert value to integer
     valueInt, err := strconv.Atoi(value)
     if err != nil {
         return fmt.Errorf("value must be a valid integer")
@@ -129,7 +127,6 @@ func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface,
         return fmt.Errorf("failed to update asset: %v", err)
     }
 
-    // Emit event for asset update
     err = ctx.GetStub().SetEvent("AssetUpdated", assetBytes)
     if err != nil {
         return fmt.Errorf("failed to emit event: %v", err)
@@ -138,7 +135,7 @@ func (s *SmartContract) UpdateAsset(ctx contractapi.TransactionContextInterface,
     return nil
 }
 
-// DeleteAsset removes an asset from the ledger
+// DeleteAsset 
 func (s *SmartContract) DeleteAsset(ctx contractapi.TransactionContextInterface, assetID string) error {
     exists, err := s.AssetExists(ctx, assetID)
     if err != nil {
@@ -148,7 +145,7 @@ func (s *SmartContract) DeleteAsset(ctx contractapi.TransactionContextInterface,
         return fmt.Errorf("the asset %s does not exist", assetID)
     }
 
-    // We still need to read the asset to get the owner for composite key deletion
+    //  read the asset to get the owner for composite key deletion
     existingAsset, err := s.ReadAsset(ctx, assetID)
     if err != nil {
         return err
@@ -169,7 +166,6 @@ func (s *SmartContract) DeleteAsset(ctx contractapi.TransactionContextInterface,
         return fmt.Errorf("failed to delete composite key: %v", err)
     }
 
-    // Emit event for asset deletion
     err = ctx.GetStub().SetEvent("AssetDeleted", []byte(assetID))
     if err != nil {
         return fmt.Errorf("failed to emit event: %v", err)
