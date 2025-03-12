@@ -27,7 +27,7 @@ A Hyperledger Fabric-based chaincode for managing digital assets on a blockchain
 ## ⚙️ Prerequisites
 
 - 🐳 Hyperledger Fabric v2.4+ network
-- 🐹 Go 1.23 environment
+- 🐹 Go 1.23.0 environment
 - 🧰 Fabric SDK dependencies
 - 🔐 Properly configured cryptographic materials
 

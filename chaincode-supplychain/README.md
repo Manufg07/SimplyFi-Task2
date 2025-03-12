@@ -25,7 +25,7 @@ A Hyperledger Fabric-based solution for tracking products through supply chain s
 ## ⚙️ Prerequisites
 
 - 🐳 Hyperledger Fabric v2.4+ network
-- 🐹 Go 1.23 environment
+- 🐹 Go 1.23.0 environment
 - 🧰 Fabric SDK dependencies (`fabric-contract-api-go/v2`)
 - 🔐 Properly configured cryptographic materials
 
