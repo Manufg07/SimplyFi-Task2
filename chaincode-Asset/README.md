@@ -20,9 +20,7 @@ A Hyperledger Fabric-based chaincode for managing digital assets on a blockchain
 | `CreateAsset`            | Registers new assets on the ledger with initial properties                  |
 | `ReadAsset`              | Retrieves asset details by unique ID                                        |
 | `UpdateAsset`            | Modifies existing asset properties (name, owner, value)                     |
-| `DeleteAsset`            | Permanently removes an asset from the ledger                                |
-| `TransferAsset`          | Changes ownership of an existing asset                                      |
-| `GetAllAssets`           | Retrieves complete list of all assets in the network                        |
+| `DeleteAsset`            | Permanently removes an asset from the ledger                                |                                      |
 | `QueryAssetsByOwner`     | Finds all assets owned by a specific entity                                 |
 | `AssetExists`            | Checks existence of an asset in the ledger                                  |
 
