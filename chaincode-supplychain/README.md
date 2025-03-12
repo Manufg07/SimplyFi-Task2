@@ -140,12 +140,12 @@ peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.exa
 ```
 ./network.sh down
 ```
-# Remove chaincode containers
+### Remove chaincode containers
 ```
 docker rm -f $(docker ps -aq)
 ```
 
-# Remove chaincode images
+### Remove chaincode images
 ```
 docker rmi -f $(docker images -q)
 ```
