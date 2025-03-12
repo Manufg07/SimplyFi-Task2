@@ -8,7 +8,7 @@ import (
 	"github.com/hyperledger/fabric-contract-api-go/v2/contractapi"
 )
 
-// SmartContract implements the supply chain tracking logic
+// Implements the supply chain tracking logic
 type SmartContract struct {
 	contractapi.Contract
 }
@@ -19,14 +19,14 @@ type StatusEntry struct {
 	Timestamp string `json:"timestamp"`
 }
 
-// Product represents a tracked item in the supply chain
+// Represents a tracked item in the supply chain
 type Product struct {
 	ProductID     string        `json:"productID"`
 	CurrentStatus string        `json:"currentStatus"`
 	StatusHistory []StatusEntry `json:"statusHistory"`
 }
 
-// Valid status transitions for business logic enforcement
+// Valid status transitions 
 var validStatuses = map[string]struct{}{
 	"Manufactured": {},
 	"Shipped":      {},
@@ -34,8 +34,7 @@ var validStatuses = map[string]struct{}{
 	"Delivered":    {},
 }
 
-// Added validation for status transitions
-// MODIFICATION: Added status transition rules to enforce valid state machine logic
+// Added status transition rules to enforce valid state machine logic
 var validTransitions = map[string][]string{
 	"Manufactured": {"Shipped"},
 	"Shipped":      {"In-Transit"},
@@ -43,7 +42,7 @@ var validTransitions = map[string][]string{
 	"Delivered":    {}, // No further transitions allowed
 }
 
-// RegisterProduct initializes a new product with Manufactured status
+// RegisterProduct 
 func (s *SmartContract) RegisterProduct(ctx contractapi.TransactionContextInterface, productID string) error {
 	if productID == "" {
 		return fmt.Errorf("product ID cannot be empty")
@@ -100,7 +99,7 @@ func (s *SmartContract) UpdateStatus(ctx contractapi.TransactionContextInterface
 		return fmt.Errorf("product already in status: %s", newStatus)
 	}
 
-	// MODIFICATION: Added transition validation to enforce proper status flow
+	//  Transition validation to enforce proper status flow
 	if !isValidTransition(product.CurrentStatus, newStatus) {
 		return fmt.Errorf("invalid transition from %s to %s", product.CurrentStatus, newStatus)
 	}
@@ -146,7 +145,6 @@ func (s *SmartContract) GetProduct(ctx contractapi.TransactionContextInterface, 
 	return &product, nil
 }
 
-// MODIFICATION: Added dedicated function to get only status history for clear separation of concerns
 // GetProductHistory retrieves only the status timeline of a product
 func (s *SmartContract) GetProductHistory(ctx contractapi.TransactionContextInterface, productID string) ([]StatusEntry, error) {
 	product, err := s.GetProduct(ctx, productID)
@@ -181,7 +179,7 @@ func (s *SmartContract) GetAllProducts(ctx contractapi.TransactionContextInterfa
 	return products, nil
 }
 
-// MODIFICATION: Added query function to filter products by status
+
 // GetProductsByStatus retrieves all products with a specific status
 func (s *SmartContract) GetProductsByStatus(ctx contractapi.TransactionContextInterface, status string) ([]*Product, error) {
 	if _, valid := validStatuses[status]; !valid {
@@ -203,7 +201,7 @@ func (s *SmartContract) GetProductsByStatus(ctx contractapi.TransactionContextIn
 	return filteredProducts, nil
 }
 
-// productExists checks for product existence
+// productExists checks 
 func (s *SmartContract) productExists(ctx contractapi.TransactionContextInterface, productID string) (bool, error) {
 	productBytes, err := ctx.GetStub().GetState(productID)
 	if err != nil {
@@ -230,7 +228,6 @@ func (s *SmartContract) getTxTimestamp(ctx contractapi.TransactionContextInterfa
 	return time.Unix(txTime.Seconds, int64(txTime.Nanos)).UTC().Format(time.RFC3339), nil
 }
 
-// MODIFICATION: Added helper function to validate state transitions
 // isValidTransition checks if a status transition is valid according to business rules
 func isValidTransition(currentStatus, newStatus string) bool {
 	allowedNextStatuses, exists := validTransitions[currentStatus]
